@@ -1,0 +1,24 @@
+#Install Apache:
+ubuntu@ip-172-31-83-147:~$ ansible control-node -m apt -a 'name=apache2 state=latest' -b
+
+# Enabling Service 
+ubuntu@ip-172-31-83-147:~$ ansible control-node -m service -a 'name=apache2 enabled=yes' -b
+
+#Restart Service
+ubuntu@ip-172-31-83-147:~$ ansible control-node -m service -a 'name=apache2 state=restarted' -b
+
+#Installing netstat
+ubuntu@ip-172-31-83-147:~$ ansible control-node -m apt -a 'name=net-tools state=latest' -b
+
+#Clone Contents
+ubuntu@ip-172-31-83-147:~$ git clone https://github.com/mdn/beginner-html-site-styled.git
+
+#Copy Contents:
+ubuntu@ip-172-31-83-147:~$ ansible control-node -m copy -a 'src=/home/ubuntu/beginner-html-site-styled/ dest=/var/www/html/' -b
+
+control-node | CHANGED => {
+    "changed": true,
+    "dest": "/var/www/html/",
+    "src": "/home/ubuntu/beginner-html-site-styled/"
+}
+ubuntu@ip-172-31-83-147:~$
